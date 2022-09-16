@@ -1,35 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head class="text-white">
     <title>24h Birthdayversary Extravaganza</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BIZ+UDMincho&family=BioRhyme+Expanded&family=Italiana&family=Playfair+Display:ital@1&family=Teko:wght@300&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/hydra-synth"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'aaa': ['Teko', 'sans-serif'],
+                        'bbb': ['Playfair Display', 'serif'],
+                        'ccc': ['BioRhyme Expanded', 'serif'],
+                        'ddd': ['BIZ UDMincho', 'serif'],
+                        'eee': ['UnifrakturMaguntia', 'monospace'],
+                        'fff': ['Italiana', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
-<body class="overflow-hidden">
+<body>
     <canvas id="background_canvas" class="w-screen h-screen absolute"></canvas>
-    <div class="w-screen h-screen absolute top-0 left-0 xl:px-96 lg:px-64 md:px-32 sm:px-12 md:py-32 sm:py-12 flex flex-col justify-between space-y-12">
-        <div class="bg-red-700 p-4">
-            <h1 class="text-6xl pb-4">24h Birthdayversary Extravaganza</h1>
-            <p class="text-4xl text-white">A Vernissage in Three Acts</p>
-        </div>
-        
-        <div class="bg-red-700 p-4">
-            <p class="text-4xl">ASH / ADKR / OSCAR HUGO / LIMINAL STATE / MANNA / SOUND AND FURY  / N.E.GIRL / PITCH BITCH / WOMUFF / OKOURU / SAVY DJ</p>
-        </div>
-    
-        <div class="bg-red-700 p-4 text-center text-white">
-            <div class="text-xl space-x-8 pb-4">
-                <p class="inline">24/09/22 16:00 - 16:00</p>
-                <p class="inline">Secret Location [CPH]</p>
-                <p class="inline">Invite only</p>
+    <div class="w-screen h-screen absolute top-0 left-0 text-white">
+        <div class="min-h-full xl:px-96 md:px-32 sm:px-12 md:py-32 sm:py-12 flex flex-col justify-center lg:space-y-12 space-y-6">
+            <div class="p-4">
+                <h1 class="md:text-6xl text-4xl"><span class="font-fff tracking-wide">24h Birthdayversary </span><span class="font-eee tracking-[.15em]">Extravaganza</span></h1>
+                <p class="md:text-4xl text-2xl font-bbb tracking-widest">A Vernissage in Three Acts</p>
             </div>
-            <p class="text-xl underline font-bold"><a href="https://buy.stripe.com/test_aEUdRFfcl1KZ4aQ5kl">Get tickets</a></p>
-        </div>
+
+            <div class="p-4 lg:text-lg md:text-md text-sm">
+                <div class="space-x-8 text-center font-ccc">
+                    <p class="inline">24/09/22 16:00 - 16:00</p>
+                    <p class="inline">Secret Location [CPH]</p>
+                    <p class="inline">Invite only</p>
+                </div>
+                <p class="underline font-bold mt-4 text-center font-ccc tracking-[.75em] bg-white text-black">
+                    <a href="https://buy.stripe.com/test_aEUdRFfcl1KZ4aQ5kl">Troll toll</a>
+                </p>
+            </div>
+
+            <div class="p-4">
+                <p class="md:text-4xl text-xl text-right font-ddd">
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">HUGO</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">SOUND & FURY</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">LIMINAL STATE (live)</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">ANIMMAC</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">OKOURU</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">FILTH.Y</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">WOMUFF</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">SAVY DJ</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">MANNA</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">PITCH BITCH</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">ADKR</span>
+                    <span sep=" / " class="inline-block after:content-[attr(sep)]">DINGOTRACKS</span>
+                    <span>N.E.GIRL</span>
+                </p>
+            </div>
+        </div> 
     </div>
 
     <script>
@@ -38,7 +75,16 @@
             canvas: document.getElementById("background_canvas"),
             detectAudio: false
         })
-        noise().rotate(0, 0.1).kaleid().color(-0.5, 0.1).out()
+        voronoi(350,0.15)
+            .modulateScale(osc(8).rotate(Math.sin(time)),.5)
+            .thresh(.8)
+            .modulateRotate(osc(7),.4)
+            .thresh(.7)
+            .diff(src(o0).scale(1.8))
+            .modulateScale(osc(2).modulateRotate(o0,.74))
+            .diff(src(o0).rotate([-.012,.01,-.002,0]).scrollY(0,[-1/199800,0].fast(0.7)))
+            .brightness([-.02,-.17].smooth().fast(.5))
+            .out()
     </script>
 </body>
 
