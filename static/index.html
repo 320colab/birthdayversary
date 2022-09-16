@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>24h Birthdayversary Extravaganza</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/hydra-synth"></script>
+</head>
+
+<body class="overflow-hidden">
+    <canvas id="background_canvas" class="w-screen h-screen absolute"></canvas>
+    <div class="w-screen h-screen absolute top-0 left-0 xl:px-96 lg:px-64 md:px-32 sm:px-12 md:py-32 sm:py-12 flex flex-col justify-between space-y-12">
+        <div class="bg-red-700 p-4">
+            <h1 class="text-6xl pb-4">24h Birthdayversary Extravaganza</h1>
+            <p class="text-4xl text-white">A Vernissage in Three Acts</p>
+        </div>
+        
+        <div class="bg-red-700 p-4">
+            <p class="text-4xl">ASH / ADKR / OSCAR HUGO / LIMINAL STATE / MANNA / SOUND AND FURY  / N.E.GIRL / PITCH BITCH / WOMUFF / OKOURU / SAVY DJ</p>
+        </div>
+    
+        <div class="bg-red-700 p-4 text-center text-white">
+            <div class="text-xl space-x-8 pb-4">
+                <p class="inline">24/09/22 16:00 - 16:00</p>
+                <p class="inline">Secret Location [CPH]</p>
+                <p class="inline">Invite only</p>
+            </div>
+            <p class="text-xl underline font-bold"><a href="https://buy.stripe.com/test_aEUdRFfcl1KZ4aQ5kl">Get tickets</a></p>
+        </div>
+    </div>
+
+    <script>
+        // create a new hydra-synth instance
+        var hydra = new Hydra({
+            canvas: document.getElementById("background_canvas"),
+            detectAudio: false
+        })
+        noise().rotate(0, 0.1).kaleid().color(-0.5, 0.1).out()
+    </script>
+</body>
+
+</html>
