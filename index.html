@@ -29,10 +29,10 @@
     </script>
 </head>
 
-<body>
+<body class="overflow-hidden">
     <canvas id="background_canvas" class="w-screen h-screen absolute"></canvas>
     <div class="w-screen h-screen absolute top-0 left-0 text-white">
-        <div class="min-h-full xl:px-96 md:px-32 sm:px-12 md:py-32 sm:py-12 flex flex-col justify-center lg:space-y-12 space-y-6">
+        <div class="min-h-full xl:px-48 md:px-32 sm:px-12 md:py-32 sm:py-12 flex flex-col justify-center lg:space-y-12 space-y-6">
             <div class="p-4">
                 <h1 class="md:text-6xl text-4xl"><span class="font-fff tracking-wide">24h Birthdayversary </span><span class="font-eee tracking-[.15em]">Extravaganza</span></h1>
                 <p class="md:text-4xl text-2xl font-bbb tracking-widest">A Vernissage in Three Acts</p>
@@ -75,16 +75,43 @@
             canvas: document.getElementById("background_canvas"),
             detectAudio: false
         })
-        voronoi(350,0.15)
-            .modulateScale(osc(8).rotate(Math.sin(time)),.5)
-            .thresh(.8)
-            .modulateRotate(osc(7),.4)
-            .thresh(.7)
-            .diff(src(o0).scale(1.8))
-            .modulateScale(osc(2).modulateRotate(o0,.74))
-            .diff(src(o0).rotate([-.012,.01,-.002,0]).scrollY(0,[-1/199800,0].fast(0.7)))
-            .brightness([-.02,-.17].smooth().fast(.5))
-            .out()
+        let choice = Math.floor(Math.random() * 3);
+        switch(choice) {
+          case 0:
+            voronoi(350,0.15)
+              .modulateScale(osc(8).rotate(Math.sin(time)),.5)
+              .thresh(.8)
+              .modulateRotate(osc(7),.4)
+              .thresh(.7)
+              .diff(src(o0).scale(1.8))
+              .modulateScale(osc(2).modulateRotate(o0,.74))
+              .diff(src(o0).rotate([-.012,.01,-.002,0]).scrollY(0,[-1/199800,0].fast(0.7)))
+              .brightness([-.02,-.17].smooth().fast(.5))
+              .out();
+            break;
+          case 1:
+            noise(18)
+              .colorama(1)
+              .posterize(2)
+              .kaleid(50)
+              .mask(shape(25, 0.25).modulateScale(noise(400.5, 0.5)))
+              .mask(shape(400, 1, 2.125))
+              .modulateScale(osc(6, 0.125, 0.05).kaleid(50))
+              .mult(osc(20, 0.05, 2.4).kaleid(50), 0.25)
+              .scale(1.75, 0.65, 0.5)
+              .modulate(noise(0.5))
+              .saturate(6)
+              .posterize(4, 0.2)
+              .scale(1.5)
+              .out();
+            break;
+          case 2:
+          default:
+            osc(5,.1).modulate(noise(6),.22).diff(o0)
+              .modulateScrollY(osc(5).modulate(osc().rotate(),.15))
+              .scale(.72).color(0.05,.65,0.05)
+              .out();
+        }
     </script>
 </body>
 
